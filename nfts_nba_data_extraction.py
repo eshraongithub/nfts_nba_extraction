@@ -19,7 +19,7 @@ moments_folder = os.getcwd() + "\\moments_data"
 
 files = [os.path.join(moments_folder, filename) for filename in os.listdir(moments_folder)]
 for filename in files:
-    if (now - os.stat(filename).st_mtime) > 1800:
+    if (now - os.stat(filename).st_mtime) > 60:
         try:
             os.remove(filename)
         except OSError:
@@ -146,7 +146,7 @@ stats_folder = os.getcwd() + "\\stats_data"
 
 files = [os.path.join(stats_folder, filename) for filename in os.listdir(stats_folder)]
 for filename in files:
-    if (now - os.stat(filename).st_mtime) > 1800:
+    if (now - os.stat(filename).st_mtime) > 60:
         try:
             os.remove(filename)
         except OSError:
