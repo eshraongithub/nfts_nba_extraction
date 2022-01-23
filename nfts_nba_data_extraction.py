@@ -212,7 +212,9 @@ existing_data = pd.read_csv(accumulated_data_path)
 
 refreshed_df= pd.concat([existing_data, moments_538_stats], axis=0, ignore_index=False)
 
+refreshed_df = refreshed_df.drop_duplicates()
+
 refreshed_df.to_csv(accumulated_data_path, sep=',', index=False)
 
 end = time.time()
-print('Your moments data has been updated in', end - start, 'seconds')
+print('\n Success! Your moments data has been updated in', int(end - start), 'seconds.')
