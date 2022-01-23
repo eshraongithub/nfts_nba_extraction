@@ -184,7 +184,7 @@ try:
     cols = [i for i in range(29) if i not in cols2skip]
     
     # Read the CSV and assign it to the variable stats
-    stats = pd.read_excel(latest_stats_file, skiprows=[0], usecols=cols)
+    stats = pd.read_excel(latest_stats_file, skiprows=[0], usecols=cols, engine='openpyxl')
         
     #stats = stats[~stats.Set.str.contains("WNBA|In Her Bag")]
 
