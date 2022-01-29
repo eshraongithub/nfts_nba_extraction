@@ -132,15 +132,6 @@ moments_538['cs_per_dollar'] = moments_538['cs_per_dollar'].round(2)
 
 moments_538['market_cap']= moments_538['Circulation Count']*moments_538['Low Ask']
 
-# Replace five_thirty_eight blanks with 'vintage'
-moments_538['category'].fillna('vintage', inplace=True)
-
-moments_538['age'].fillna('vintage', inplace=True)
-
-moments_538['position'].fillna('vintage', inplace=True)
-
-moments_538['market_value'].fillna('vintage', inplace=True)
-
 ## Delete old NBA Stats data
 stats_folder = os.getcwd() + "\\stats_data"
 
