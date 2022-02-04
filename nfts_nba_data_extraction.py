@@ -175,7 +175,7 @@ try:
     cols = [i for i in range(29) if i not in cols2skip]
     
     # Read the CSV and assign it to the variable stats
-    stats = pd.read_excel(latest_stats_file, skiprows=[0], usecols=cols)
+    stats = pd.read_excel(latest_stats_file, skiprows=[0], usecols=cols, engine='openpyxl')
         
     #stats = stats[~stats.Set.str.contains("WNBA|In Her Bag")]
 
@@ -203,7 +203,9 @@ existing_data = pd.read_csv(accumulated_data_path)
 
 refreshed_df= pd.concat([existing_data, moments_538_stats], axis=0, ignore_index=False)
 
+refreshed_df = refreshed_df.drop_duplicates()
+
 refreshed_df.to_csv(accumulated_data_path, sep=',', index=False)
 
 end = time.time()
-print('Your moments data has been updated in', end - start, 'seconds')
+print('\n Success! Your moments data has been updated in', int(end - start), 'seconds.')
