@@ -111,7 +111,7 @@ merged_df_new= pd.crosstab(merged_df.player_name,merged_df.Series)
 
 merged_df_new = merged_df_new.stack().reset_index().rename(columns={0:'series_count'})
 
-merged_df_new['Series'] = merged_df_new['Series'].map({'1':'CS1', '2':'CS2', '3':'CS3', '4':'CS4'}) 
+merged_df_new['Series'] = merged_df_new['Series'].map({'1':'CS1', '2':'CS2', '3':'CS3', '4':'CS4', 'S21':'S21'}) 
 
 merged_df_new = merged_df_new.pivot_table(values='series_count', index=['player_name'], columns=['Series'], aggfunc='sum')
 
@@ -131,15 +131,6 @@ moments_538['cs_per_dollar'] = moments_538['Collector Score']/moments_538['Low A
 moments_538['cs_per_dollar'] = moments_538['cs_per_dollar'].round(2)
 
 moments_538['market_cap']= moments_538['Circulation Count']*moments_538['Low Ask']
-
-# Replace five_thirty_eight blanks with 'vintage'
-moments_538['category'].fillna('vintage', inplace=True)
-
-moments_538['age'].fillna('vintage', inplace=True)
-
-moments_538['position'].fillna('vintage', inplace=True)
-
-moments_538['market_value'].fillna('vintage', inplace=True)
 
 ## Delete old NBA Stats data
 stats_folder = os.getcwd() + "\\stats_data"
@@ -201,7 +192,7 @@ stats["full_name"] = stats["full_name"].str[0]
 stats['full_name'] = stats['full_name'].astype(str)
 
 # Merge five_thirty_eight into moments on the player_name
-moments_538_stats = moments_538.merge(stats, how='right', left_on="player_name",right_on="full_name")
+moments_538_stats = moments_538.merge(stats, how='left', left_on="player_name",right_on="full_name")
 
 moments_538_stats = moments_538_stats[moments_538_stats['player_name'].notna()]
 moments_538_stats = moments_538_stats.drop('full_name', axis=1)
